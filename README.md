@@ -42,6 +42,7 @@ Dockerfile
 1. Build: `cargo build --release`
 2. Run: `cargo run`
 3. Test: `cargo test`
+4. Clean build artifacts: `cargo clean`
 
 ## Rust Concepts Demonstrated
 
