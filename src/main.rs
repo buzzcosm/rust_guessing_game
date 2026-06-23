@@ -1,14 +1,8 @@
+mod game;
+
 use rand::{self, RngExt};
 use std::cmp::Ordering;
 use std::io;
-
-fn parse_guess(input: &str) -> Result<u32, std::num::ParseIntError> {
-    input.trim().parse()
-}
-
-fn compare(guess: u32, secret: u32) -> Ordering {
-    guess.cmp(&secret)
-}
 
 fn main() {
     println!("Guess the number!");
@@ -28,7 +22,7 @@ fn main() {
 
         // The right-hand side still evaluates using the old String binding (input.trim().parse()),
         // then the result is bound to a new u32 variable also named `guess`, shadowing the String.
-        let guess = match parse_guess(&input) {
+        let guess = match game::parse_guess(&input) {
             Ok(num) => num,
             Err(_) => {
                 println!("Please type a valid number!");
@@ -39,7 +33,7 @@ fn main() {
         attempts += 1;
         println!("You guessed: {}", guess);
 
-        match compare(guess, secret_number) {
+        match game::compare(guess, secret_number) {
             Ordering::Less => println!("Too small!"),
             Ordering::Greater => println!("Too big!"),
             Ordering::Equal => {
@@ -47,45 +41,5 @@ fn main() {
                 break;
             }
         }
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn parse_valid_number() {
-        assert_eq!(parse_guess("42"), Ok(42));
-    }
-
-    #[test]
-    fn parse_trims_whitespace() {
-        assert_eq!(parse_guess("  7\n"), Ok(7));
-    }
-
-    #[test]
-    fn parse_invalid_input() {
-        assert!(parse_guess("qwer").is_err());
-    }
-
-    #[test]
-    fn parse_negative_rejected() {
-        assert!(parse_guess("-5").is_err());
-    }
-
-    #[test]
-    fn compare_too_small() {
-        assert_eq!(compare(3, 10), Ordering::Less);
-    }
-
-    #[test]
-    fn compare_too_big() {
-        assert_eq!(compare(99, 10), Ordering::Greater);
-    }
-
-    #[test]
-    fn compare_correct() {
-        assert_eq!(compare(10, 10), Ordering::Equal);
     }
 }
