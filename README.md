@@ -2,6 +2,29 @@
 
 > REF: [YouTube: Coding your first project in Rust](https://www.youtube.com/watch?v=8tduMGPZsSk)
 
+A beginner Rust project: guess a random number between 1 and 100. The game gives directional feedback and counts valid attempts.
+
+## Project Structure
+
+```
+src/
+  main.rs   — I/O, game loop
+  game.rs   — pure logic: parse_guess(), compare() + unit tests
+Dockerfile
+.dockerignore
+```
+
+## Prerequisites
+
+| Tool | Min. Version | Required for |
+|---|---|---|
+| [Rust + Cargo](https://rustup.rs) | 1.94 | local build & tests |
+| [Docker](https://docs.docker.com/get-docker/) | 20.10 | containerized run |
+
+> Install Rust via `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
+
+## Setup
+
 1. Create a new project with `cargo new guessing_game`
 2. Test if all correct by running `cargo run`
 3. Add dependencies in `Cargo.toml` for random numbers with `cargo add rand`
