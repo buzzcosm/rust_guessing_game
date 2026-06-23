@@ -6,6 +6,20 @@
 2. Test if all correct by running `cargo run`
 3. Add dependencies in `Cargo.toml` for random numbers with `cargo add rand`
 
+## Run with Docker
+
+1. Build the image: `docker build -t guessing_game .`
+2. Run interactively: `docker run -it --rm --init --name guessing_game_container guessing_game`
+
+> `-it` is required — `-i` keeps stdin open, `-t` allocates a TTY for terminal input.
+> `--init` is required — without it the Rust process runs as PID 1 and does not receive `Ctrl+C` (SIGINT).
+
+## Run locally with Cargo
+
+1. Build: `cargo build --release`
+2. Run: `cargo run`
+3. Test: `cargo test`
+
 ## Rust Concepts Demonstrated
 
 | Concept | Where |
